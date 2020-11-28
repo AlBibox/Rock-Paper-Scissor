@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+body{
+    height: 100vh;
+    background-color: #000;
+}
+
+
+
+h1,h2,h3{color: #fff;}
+a{text-decoration: none;}
+a h2{color: rgba(127,255,0 ,0.8 )}
+
+
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr repeat(6, 1fr) 1fr;
+    grid-template-areas:
+        ". . ."
+        ". title ." 
+        ". score ."
+        ". play ."
+        ". gameResult ."
+        ". game ."
+        ". retry ."
+        ". . .";
+    gap: 1em 1em;
+    height: 100vh;
+    font-size: 1rem;
+   
+}
+
+.title{
+    grid-area: title;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.score{
+    grid-area: score;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: center;
+}
+
+.score h2{padding: 0.2em;}
+
+.score__playerScore{
+    grid-column: 1/2;
+    text-align: right;
+}
+.score__computerScore{
+    grid-column: 2/3;
+    text-align: left;
+}
+
+
+
+
+.play{
+    grid-area: play;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-items: center;
+    background-color: #111;
+    border-radius: 1rem;
+    
+}
+
+.play img{
+    object-fit: cover;
+    max-height: 100%;
+    width: 100%;
+}
+
+.play__rock{
+    grid-column: 1/2;
+}
+
+.play__paper{
+    grid-column: 2/3;
+}
+
+.play__scissor{
+    grid-column: 3/4;
+}
+
+
+
+.game{
+    grid-area: game;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+.game img{
+    object-fit: cover;
+    max-height: 100%;
+    width: 100%;
+}
+
+
+.gameResult{
+    grid-area: gameResult;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    padding: 0.2em;
+    
+}
+
+.retry{
+    grid-area: retry;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-items: center;
+    
+}
+
+@media (max-width: 700px){
+    .container{
+    display: grid;
+    grid-template-columns: 0.06fr 1fr 0.06fr;
+    grid-template-areas:
+        ". . ."
+        ". title ." 
+        ". score ."
+        ". play ."
+        ". gameResult ."
+        ". game ."
+        ". retry ."
+        ". . .";
+    
+
+}
+ 
+
+
+
+

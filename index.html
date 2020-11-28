@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockPaperScissor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="title"><h1>ROCK PAPER SCISSOR</h1></div>
+        <div class="score">
+            <div class="score__playerScore">
+                <h2>YOU</h2>
+                <h2 id="playerScore">0</h2>
+            </div>
+            <div class="score__computerScore">
+                <h2>NPC</h2>
+                <h2 id="computerScore">0</h2>
+            </div>
+        </div>
+        <div class="play">
+            <div class="play__rock">
+                <a href="#" class="plays" id="rock"><img src="IMG/rock.png"></a>
+            </div>
+            <div class="play__paper">
+                <a href="#" class="plays" id="paper"><img src="IMG/paper.png"></a>
+            </div>
+            <div class="play__scissor">
+                <a href="#" class="plays" id="scissor"><img src="IMG/scissor.png"></a>
+            </div>
+        </div>
+        
+        <div class="gameResult">
+            <h2 id="gameResult"></h2>
+        </div>
+        <div class="game">
+            <div class="game__playerGame">
+                <img id="userGame" src="IMG/paper.png" alt="">
+            </div>
+            <div class="game__vs">
+                <h1>VS</h1>
+            </div>
+            <div class="game__computerGame">
+                <img id="computerGame" src="IMG/rock.png" alt="">
+            </div>
+        </div>
+        <div class="retry">
+            <div></div>
+            <div><a href=""><h2>RETRY</h2></a></div>
+            <div></div>
+        </div>
+    </div>    
+</body>
+
+<script>   
+    let yourScore = 0;
+    let computerScore = 0;
+
+    
+    function cPlay() {
+        let computerGame = document.querySelector("#computerGame");
+        let computerMove = Math.floor(Math.random() * 3);
+
+        if(computerMove == 0) computerMove = "rock";
+        else if(computerMove == 1) computerMove = "paper";
+        else computerMove = "scissor";
+
+        computerGame.src = `IMG/${computerMove}.png`;
+        return computerMove;      
+    }
+    
+  
+    function playRound(userMove, computerPlay){
+
+        if(((yourScore+computerScore) >= 5) && (yourScore > computerScore)){
+            gameResult.textContent = "YOU WIN THE GAME";
+        }else if(((yourScore + computerScore) >= 5) && (yourScore < computerScore)){
+            gameResult.textContent = "YOU LOSE THE GAME";
+        }else if (((yourScore + computerScore) >= 5) && (yourScore == computerScore)) {
+            gameResult.textContent = "THE GAME FINISHED PAIR";
+        }else{
+            let gameResult = document.querySelector("#gameResult");
+            if (computerPlay == userMove) {
+                gameResult.textContent = `The match finished pair!! Computer selected ${computerPlay}`;
+                yourScore++;
+                computerScore++;
+
+            } else if ((computerPlay == "rock" && userMove == "paper") || (computerPlay == "paper" && userMove == "scissor") ||
+                (computerPlay == "scissor" && userMove == "rock")) {
+                gameResult.textContent = `You win!! ${userMove} beats ${computerPlay}`;
+                yourScore++;
+            } else {
+                gameResult.textContent = `You lose!! ${computerPlay} beats ${userMove}`;
+                computerScore++;
+            }
+            document.querySelector("#playerScore").textContent = `${yourScore}`;
+            document.querySelector("#computerScore").textContent = `${computerScore}`;
+        }           
+    }
+
+
+    function userPlay() {
+        let userGame = document.querySelector("#userGame");
+        userGame.src = `IMG/${this.id}.png`;
+        let userMove = this.id;
+        let computerPlay = cPlay();
+        playRound(userMove, computerPlay);             
+    }
+
+   
+    let plays = document.querySelectorAll(".plays");
+    plays.forEach((play) => { play.addEventListener("click", userPlay)});
+ 
+</script>
+</html>
